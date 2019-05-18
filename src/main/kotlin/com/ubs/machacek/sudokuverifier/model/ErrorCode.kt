@@ -1,0 +1,11 @@
+package com.ubs.machacek.sudokuverifier.model
+
+enum class ErrorCode {
+
+    SUDOKU_ERR_001_INVALID_SIZE,
+    SUDOKU_ERR_002_INVALID_CHARACTERS,
+    SUDOKU_ERR_003_INVALID_SUM,
+    SUDOKU_ERR_004_DUPLICATE_CHARACTERS,
+    SUDOKU_ERR_005_INVALID_FILE
+
+}
