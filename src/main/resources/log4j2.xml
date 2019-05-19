@@ -9,8 +9,15 @@
 	</Appenders>
 
 	<Loggers>
+
 		<Root level="INFO">
 			<AppenderRef ref="STDOUT" />
 		</Root>
+		<!-- if you want to debug, replace INFO Logger with this -->
+		<!--
+		<Root level="DEBUG">
+			<AppenderRef ref="STDOUT" />
+		</Root>
+		-->
 	</Loggers>
 </Configuration>

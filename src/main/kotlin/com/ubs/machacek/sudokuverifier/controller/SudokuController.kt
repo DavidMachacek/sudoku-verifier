@@ -46,7 +46,7 @@ class SudokuController(
                 sudokuService.validateMatrix(matrix)
             }
         }.also { duration ->
-            log.info(Supplier { "operation=validateSudokuEnd, duration=$duration" })
+            log.info(Supplier { "operation=validateSudokuEnd, duration=$duration ms" })
         }
     }
 }

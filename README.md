@@ -2,6 +2,8 @@
 
 Stand alone microservice for validating Sudoku.
 
+When everything is ok, the service will return 204. Otherwise it returns 422 - Unprocessable entity along with error description why the sudoku application could not have been processed or be verified as ok.
+
 Uses coroutines and supports distributed logging.
 
 #### Technologies

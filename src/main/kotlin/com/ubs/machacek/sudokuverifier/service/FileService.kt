@@ -43,6 +43,7 @@ class FileService(
                         .take(9)
                         .toList()
                         .toTypedArray().also { row ->
+                            log.debug( Supplier { "operation=checkRowSize, rowSize=${row.size}" })
                             if (row.size < 9) {
                                 throwError(
                                     errorCode = ErrorCode.SUDOKU_ERR_001_INVALID_SIZE,

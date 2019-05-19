@@ -60,6 +60,7 @@ class SudokuService(
     }
 
     private suspend fun validatePart(row: Array<Int?>) {
+        log.debug( Supplier { "operation=validatingPartBegin, part=${objectMapper.writeValueAsString(row)}" })
         val notNullRow = row.filterNotNull()
         notNullRow.forEach { number ->
             if (!SudokuService.ALLOWED_NUMBERS.contains(number)) {
@@ -81,6 +82,7 @@ class SudokuService(
                 errorMessage = "Duplicate number axis ${objectMapper.writeValueAsString(row)}"
             )
         }
+        log.debug( Supplier { "operation=validatingEnd" })
     }
 
     private fun transposeMatrix(matrix: Array<Array<Int?>>): Array<Array<Int?>> {
@@ -92,7 +94,7 @@ class SudokuService(
             }
         }
         return transpose.also {
-            log.info(Supplier { "operation=transformMatrixEnd" })
+            log.debug(Supplier { "operation=transformMatrixEnd" })
         }
     }
 
