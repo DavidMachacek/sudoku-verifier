@@ -39,9 +39,7 @@ class SudokuService(
     }
 
     /**
-     * Performs all 3 validations types using coroutine to achieve asynchronous-like computation
-     * without demanding expensive new threads, since the validation tasks are really not that
-     * complex.
+     * Performs all 3 validations types using coroutine to achieve asynchronous-like computation.
      * Each validation is basically just row validation, once performed on original matrix, once
      * on transposed one (to check columns) and once on inner small 3x3 grids.
      * Each coroutines context is also provided with tracing context for debug purposes.
