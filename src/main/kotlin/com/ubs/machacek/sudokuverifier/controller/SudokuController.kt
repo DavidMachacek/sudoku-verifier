@@ -33,20 +33,20 @@ class SudokuController(
     @ApiOperation("Validates file with Sudoku")
     @ApiResponses(
         ApiResponse(code = 204, message = "Sudoku is OK"),
-        ApiResponse(code = 422, message = "Invalid is not OK. Reason is supplied in returning JSON")
+        ApiResponse(code = 422, message = "Invalid is not OK. Reason is supplied in returning error data object", response = ErrorTO::class)
     )
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PostMapping
     fun validateSudokuFile(
-        @RequestParam file: MultipartFile
+        @RequestParam(value = "sudoku") file: MultipartFile
     ) {
-        log.info(Supplier { "receive=[POST]/sudoku, callType=REST, operation=uploadCsvBegin, inputParams=[fileName=${file.name}, fileContentType=${file.contentType}]" })
+        log.info(Supplier { "receive=[POST]/sudoku, callType=REST, operation=validateSudokuBegin, inputParams=[fileName=${file.name}, fileContentType=${file.contentType}]" })
         measureTimeMillis {
             fileService.readCsv(ByteArrayInputStream(file.bytes)).let { matrix ->
                 sudokuService.validateMatrix(matrix)
             }
         }.also { duration ->
-            log.info(Supplier { "operation=uploadCsvEnd, duration=$duration" })
+            log.info(Supplier { "operation=validateSudokuEnd, duration=$duration" })
         }
     }
 }

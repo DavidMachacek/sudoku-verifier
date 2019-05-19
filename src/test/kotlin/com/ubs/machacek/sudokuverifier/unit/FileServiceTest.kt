@@ -1,16 +1,27 @@
 package com.ubs.machacek.sudokuverifier.unit
 
+import com.ubs.machacek.sudokuverifier.configuration.FileParserConfiguration
 import com.ubs.machacek.sudokuverifier.model.SudokuException
 import com.ubs.machacek.sudokuverifier.service.FileService
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
+import org.mockito.Mockito
 import java.io.File
 import kotlin.test.assertEquals
 
 class FileServiceTest {
 
-    private val service = FileService()
+    /**
+     * Mock used to avoid initializing Spring context
+     */
+    private fun props() = run {
+        val mock = Mockito.mock(FileParserConfiguration::class.java)
+        Mockito.`when`(mock.delimiter).thenReturn(",")
+        mock
+    }
+
+    private val service = FileService(props())
 
     @Rule
     @JvmField
@@ -71,6 +82,7 @@ class FileServiceTest {
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
     }
+
     private fun getMatrix_blankGrid(): Array<Array<Int?>> {
         return arrayOf<Array<Int?>>(
             arrayOf(3, 1, 6, 5, 7, 8, 4, 9, 2),

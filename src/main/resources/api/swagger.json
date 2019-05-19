@@ -1,0 +1,63 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "API to verify validity of your sudoku application",
+    "version" : "3.1.7",
+    "title" : "Sudoku Verifier Service",
+    "contact" : {
+      "name" : "David Machacek",
+      "email" : "davido.machacek@gmail.com"
+    }
+  },
+  "tags" : [ {
+    "name" : "API for Sudoku related operations"
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/sudoku" : {
+      "post" : {
+        "tags" : [ "API for Sudoku related operations" ],
+        "summary" : "Validates file with Sudoku",
+        "description" : "",
+        "operationId" : "validateSudokuFile",
+        "parameters" : [ {
+          "name" : "sudoku",
+          "in" : "query",
+          "required" : true,
+          "type" : "ref"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Sudoku is OK"
+          },
+          "422" : {
+            "description" : "Invalid is not OK. Reason is supplied in returning error data object",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorTO"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "ErrorTO" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "string",
+          "example" : "SUDOKU_ERR_002_INVALID_CHARACTERS",
+          "description" : "Error code to identify occurred error.",
+          "enum" : [ "SUDOKU_ERR_001_INVALID_SIZE", "SUDOKU_ERR_002_INVALID_CHARACTERS", "SUDOKU_ERR_003_INVALID_SUM", "SUDOKU_ERR_004_DUPLICATE_CHARACTERS", "SUDOKU_ERR_005_INVALID_FILE", "SUDOKU_ERR_006_MISSING_FILE" ]
+        },
+        "message" : {
+          "type" : "string",
+          "example" : "Invalidate number inside row [13,1,6,5,2,9,4,8,7]",
+          "description" : "Message briefly describing error and part of sudoku, which caused it. Message is human readable always in english language."
+        }
+      },
+      "description" : "Single validation error object"
+    }
+  }
+}

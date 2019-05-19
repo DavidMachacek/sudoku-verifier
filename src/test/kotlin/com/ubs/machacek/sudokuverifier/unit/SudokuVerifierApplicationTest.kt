@@ -4,13 +4,13 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.ubs.machacek.sudokuverifier.model.SudokuException
 import com.ubs.machacek.sudokuverifier.service.SudokuService
 import com.ubs.machacek.sudokuverifier.util.TracingContextElement
-import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ExpectedException
 
 /**
- * Error message asserts are commented, since you never know, which coroutine finishes first and matching regex for all variants would be quite expensive
+ * Error message asserts are commented, since you never know, which coroutine
+ * finishes first and matching regex for all variants would be quite expensive
  */
 class SudokuVerifierApplicationTest {
 
@@ -33,10 +33,7 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            service.validateMatrixAsync(matrix).await()
-        }
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -52,12 +49,9 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            expectedEx.expect(SudokuException::class.java)
-            //expectedEx.expectMessage("Sum of part [4,1,5,8,6,9,7,9,2] is not 45")
-            service.validateMatrixAsync(matrix).await()
-        }
+        expectedEx.expect(SudokuException::class.java)
+        //expectedEx.expectMessage("Sum of part [4,1,5,8,6,9,7,9,2] is not 45")
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -73,12 +67,9 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            expectedEx.expect(SudokuException::class.java)
-            //expectedEx.expectMessage("Invalidate number inside row [13,1,6,5,2,9,4,8,7]")
-            service.validateMatrixAsync(matrix).await()
-        }
+        expectedEx.expect(SudokuException::class.java)
+        //expectedEx.expectMessage("Invalidate number inside row [13,1,6,5,2,9,4,8,7]")
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -94,12 +85,9 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            expectedEx.expect(SudokuException::class.java)
-            //expectedEx.expectMessage("Sum of part [3,1,6,5,2,9,4,8,1] is not 45")
-            service.validateMatrixAsync(matrix).await()
-        }
+        expectedEx.expect(SudokuException::class.java)
+        //expectedEx.expectMessage("Sum of part [3,1,6,5,2,9,4,8,1] is not 45")
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -115,12 +103,9 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(null, 4, 5, 2, 8, 6, 3, 1, 7)
         )
-
-        runBlocking {
-            expectedEx.expect(SudokuException::class.java)
-            //expectedEx.expectMessage("Sum of part [2,5,6,8,7,4,3,1,7] is not 45")
-            service.validateMatrixAsync(matrix).await()
-        }
+        expectedEx.expect(SudokuException::class.java)
+        //expectedEx.expectMessage("Sum of part [2,5,6,8,7,4,3,1,7] is not 45")
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -136,10 +121,7 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            service.validateMatrixAsync(matrix).await()
-        }
+        service.validateMatrix(matrix)
     }
 
     @Test
@@ -155,9 +137,6 @@ class SudokuVerifierApplicationTest {
             arrayOf(6, 9, 2, 3, 5, 1, 8, 7, 4),
             arrayOf(7, 4, 5, 2, 8, 6, 3, 1, 9)
         )
-
-        runBlocking {
-            service.validateMatrixAsync(matrix).await()
-        }
+        service.validateMatrix(matrix)
     }
 }
